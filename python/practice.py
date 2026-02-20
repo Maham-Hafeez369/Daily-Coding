@@ -7,7 +7,7 @@
 # movie=input('Enter your favourite movie name')
 # list.append(movie)
 # print(list)
-
+ 
 # #checkinh if list is a palindrome or not
 # list1=[1,2,3,2,1]
 # list2=list1.copy()
