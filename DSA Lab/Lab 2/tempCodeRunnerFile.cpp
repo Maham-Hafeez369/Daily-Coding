@@ -1,0 +1,1 @@
+*tmp = list; tmp != nullptr; t
