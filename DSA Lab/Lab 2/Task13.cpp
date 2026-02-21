@@ -117,6 +117,131 @@ public:
         newNode->next = temp->next;
         temp->next = newNode;
     }
+    void remove(float data)
+    {
+        if (head == NULL)
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+        Node *t1 = head;
+        Node *t2 = head->next;
+        while (head->getData() == data && head != nullptr) // if the head node itself contains the data to be removed, we need to update the head pointer and delete the old head node. We repeat this process until we find a head node that does not contain the data or we reach the end of the list.
+        {
+            delete t1;
+            head = t2;
+            t1 = head;
+            t2 = head->next;
+        }
+        while (t2 != nullptr) // we need to check if the current node (t2) contains the data to be removed. If it does, we update the next pointer of the previous node (t1) to skip the current node and then delete the current node. If it does not contain the data, we simply move both pointers forward to continue traversing the list.
+        {
+            if (t2->getData() == data)
+            {
+                t1->next = t2->next;
+                delete t2;
+                t2 = t1->next;
+            }
+            else
+            {
+                t1 = t2;
+                t2 = t2->next;
+            }
+        }
+    }
+    void removeNextOf(float data)
+    {
+        if (head == NULL)
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+        Node *t1 = head;
+        Node *t2 = head->next;
+        while (t2 != nullptr)
+        {
+            if (t1->getData() == data)
+            {
+                t1->next = t2->next;
+                delete t2;
+                t1 = t1->next;
+                if (t1 != nullptr)
+                {
+                    t2 = t1->next;
+                }
+            }
+            else
+            {
+                t1 = t2;
+                t2 = t2->next;
+            }
+        }
+    }
+    void removePreviousOf(float data)
+    {
+        if (head == NULL)
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+        Node *t1 = head;
+        Node *t2 = head->next;
+        while (t2->next != nullptr)
+        {
+            if (t2->next->getData() == data)
+            {
+                t1->next = t2->next;
+                delete t2;
+                t1 = t1->next;
+                if (t1 != nullptr)
+                {
+                    t2 = t1->next;
+                }
+            }
+            else
+            {
+                t1 = t2;
+                t2 = t2->next;
+            }
+        }
+    }
+    void removeith(int i)
+    {
+        if (head == NULL)
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+        if (i < 0)
+        {
+            cout << "Index cannot be negative" << endl;
+            return;
+        }
+        if (i == 0)
+        {
+            Node *temp = head;
+            head = head->next;
+            delete temp;
+            return;
+        }
+        Node *t1 = head;
+        Node *t2 = head->next;
+        for (int count = 1; t2 != nullptr && count < i - 1; count++)
+        {
+            t1 = t2;
+            t2 = t2->next;
+        }
+        if (t2 == nullptr)
+        {
+            cout << "Index out of bounds" << endl;
+            return;
+        }
+        else
+        {
+            t1->next = t2->next;
+            delete t2;
+            cout << "Element at index " << i << " removed" << endl;
+        }
+    }
 };
 void makelist(linkedList &list)
 {
@@ -161,7 +286,7 @@ int main()
     makelist(list);
 
     // your code to solve task should be here
-
+    list.removePreviousOf(10);
     // your code ends here
 
     cout << "the update list is" << endl;

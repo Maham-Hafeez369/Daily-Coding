@@ -40,6 +40,15 @@ void showlist(Node *head)
     }
     cout << '\b' << '\b' << '.' << endl;
 }
+void showrec(Node *head)
+{
+    if (head != nullptr)
+    {
+        showrec(head->next);
+        cout << head->info << ", ";
+    }
+    return;
+}
 void makelist(Node *&head)
 {
     // not a good approach, but it makes a linked list
@@ -82,8 +91,8 @@ int main()
 
     // your code ends here
 
-    cout << "the update list is" << endl;
-    showlist(list);
+    cout << "the reverse recurrsion of list is" << endl;
+    showrec(list);
 
     return 0;
 }
